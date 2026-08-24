@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'app-contato',
   imports: [],
   templateUrl: './contato.html',
-  styleUrl: './contato.css',
+  styleUrl: './contato.scss',
 })
 export class Contato {}

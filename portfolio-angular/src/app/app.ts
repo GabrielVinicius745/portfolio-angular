@@ -8,6 +8,6 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'app-root',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, MatToolbarModule, MatButtonModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.scss'
 })
 export class App {}
