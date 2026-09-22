@@ -5,8 +5,10 @@ import { TecnologiaService, Tecnologia } from '../tecnologia.service';
 @Component({
   selector: 'app-catalogo',
   imports: [MatCardModule],
-  templateUrls: './catalogo.html' 
+  templateUrl: './catalogo.html' 
 })
+
+
 export class Catalogo implements OnInit {
   private service = inject(TecnologiaService);
     tecnologias: Tecnologia[] = [];
