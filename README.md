@@ -15,6 +15,8 @@ npm (versão 11.9.0)
 
 2° etapa: Página de ínicio e sobre bem descritas, com 4 páginas no total e que podem ser alternadas entre si sem resetar a aba do navegador.
 
+3° etapa: subindo a API no ar, devolvendo JSON dos publicados com content-type e CORS. Anexação do banco de dados.
+
 
 
 Início do projeto: 01/06/2026
