@@ -20,3 +20,22 @@ npm (versão 11.9.0)
 
 
 Início do projeto: 01/06/2026
+
+
+### Aula 22: a API lê do banco
+
+Antes de subir a API, o MariaDB precisa estar de pé:
+
+```bash
+sudo service mariadb start
+cd api-node
+node server.js
+```
+
+Rotas que leem do `dwii_db`:
+
+```bash
+curl -i http://localhost:3000/api/projetos
+curl -i http://localhost:3000/api/projetos/5
+curl -i http://localhost:3000/api/tecnologias
+```
