@@ -9,6 +9,11 @@ const PORTA = 3000;
 app.use(cors())
 
 
+
+
+
+
+
 app.get('/api/projetos', async (req, res) => {
     try {
         const sql = "SELECT id, nome, descricao, tecnologias, link_github, ano FROM projetos WHERE status = 'publicado' ORDER BY ano DESC, id";
