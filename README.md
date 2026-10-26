@@ -21,6 +21,20 @@ npm (versão 11.9.0)
 
 Início do projeto: 01/06/2026
 
+## API em Node (aula 21)
+
+Uma segunda versao da API, em JavaScript, na pasta `api-node/`.
+O contrato de `GET /api/projetos` e o mesmo do `api/projetos.php`.
+
+Como rodar:
+
+    cd api-node
+    npm-install
+    node server.js
+
+A API sobe em http://localhost:3000. Teste com:
+
+    curl -i http://localhost:3000/api/projetos
 
 ### Aula 22: a API lê do banco
 
