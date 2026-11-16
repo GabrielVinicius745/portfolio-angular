@@ -88,3 +88,72 @@ Se o Codespace mudar de endereco, atualize `urlGestao` e `url` em `portfolio-ang
 Conceito visado: **A**, sujeito às provas de execução e capturas pedidas no Moodle. R1: `api/projetos.php`, blocos POST/PUT/DELETE; R2: `portfolio-angular/src/app/gestao/gestao.ts`, métodos `salvar`, `carregar`, `excluir`; R3: `gestao.html`, validação, status e mensagens; R4: esta seção e as justificativas; R5: `gestao.css` e estados de tela (validação no celular e teclado pendente).
 
 **Registro de Network a completar com resultado observado:** método: ___; status: ___; Content-Type: ___; 201 indica recurso criado e 204 indica exclusão sem corpo.
+
+
+### Aula 24: a tranca
+
+A API de Node exige autenticacao para POST, PUT e DELETE. Primeiro, no Codespace com MariaDB instalado e os dados da Aula 16:
+
+```bash
+sudo service mariadb start
+sudo mariadb dwii_db < sql/usuarios.sql
+cd api-node
+npm install
+node criar-usuario.js SEU_EMAIL SUA_SENHA
+node server.js
+```
+
+O script cria o usuario com hash bcrypt e nao precisa ficar rodando. Execute-o uma vez por email. **Nao registre a senha real no Git ou neste README**. Para usar os curl, em outro terminal:
+
+```bash
+curl -i -X POST http://localhost:3000/api/login -H 'Content-Type: application/json' -d '{"email":"SEU_EMAIL","senha":"<senha>"}'
+# Copie o token retornado, sem publicar seu valor:
+TOKEN='COLE_SEU_TOKEN_APENAS_NESTE_TERMINAL'
+curl -i http://localhost:3000/api/projetos
+curl -i http://localhost:3000/api/tecnologias
+curl -i -X POST http://localhost:3000/api/projetos -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"nome":"Projeto teste","ano":2026}'
+curl -i -X PUT http://localhost:3000/api/projetos/ID -H "Authorization: Bearer $TOKEN" -H 'Content-Type: application/json' -d '{"nome":"Projeto teste editado","ano":2026}'
+curl -i -X DELETE http://localhost:3000/api/projetos/ID -H "Authorization: Bearer $TOKEN"
+```
+
+A validade foi escolhida em **3h**, diferente das 2h do exemplo: da tempo de executar os exercicios sem renovar a cada pouco, mas o acesso ainda vence. O login devolve a **mesma resposta** tanto para email inexistente quanto para senha errada para nao revelar contas cadastradas.
+
+#### Entrega A — rotas e token
+
+| Rota | Verbo | Precisa de token? |
+| --- | --- | --- |
+| /api/login | POST | Nao |
+| /api/projetos | GET | Nao |
+| /api/projetos/:id | GET | Nao |
+| /api/projetos/todos | GET | Sim |
+| /api/projetos | POST | Sim |
+| /api/projetos/:id | PUT | Sim |
+| /api/projetos/:id | DELETE | Sim |
+| /api/tecnologias | GET | Nao |
+| /api/tecnologias | POST | Sim |
+| /api/tecnologias/:id | PUT | Sim |
+| /api/tecnologias/:id | DELETE | Sim |
+
+`GET /api/projetos/todos` devolve publicados e rascunhos somente para quem estiver autenticado. O GET publico continua filtrando somente publicados. O middleware `autenticar` e unico, antes das rotas.
+
+**Por que o SEGREDO em server.js nao serve para producao?** Qualquer pessoa com acesso ao codigo no repositorio pode ler a chave e criar tokens validos. A Aula 29 move a chave para um arquivo `.env` que nao deve entrar no Git. Antes de colocar o sistema online, configure uma chave privada longa e nunca exponha o token.
+
+**O que esta API ainda nao faz:** (1) nao revoga um token antes do fim de sua validade; (2) nao aplica controle de acesso por perfis diferentes, pois so existe o dono.
+
+#### Registro de teste — preencher com respostas realmente obtidas
+
+O GitHub guarda o codigo, mas nao executa o MariaDB do Codespace. Nao inventar respostas: preencha os campos apos rodar.
+
+| Pedido | HTTP observado | Corpo observado |
+| --- | --- | --- |
+| POST /api/login com credenciais certas | _pendente_ | _pendente_ |
+| POST /api/login com senha errada | _pendente_ | _pendente_ |
+| POST /api/projetos sem token | _pendente_ | _pendente_ |
+| POST /api/projetos com token | _pendente_ | _pendente_ |
+| PUT /api/projetos/:id com token | _pendente_ | _pendente_ |
+| DELETE /api/projetos/:id sem token | _pendente_ | _pendente_ |
+| GET /api/projetos sem token | _pendente_ | _pendente_ |
+| DELETE /api/projetos/:id com token | _pendente_ | _pendente_ |
+| GET /api/projetos/todos sem e com token | _pendente_ | _pendente_ |
+
+Integridade: tive auxilio de IA para organizar a implementação das aulas e o README; respostas reais dos testes e personalizacoes do dono devem ser registradas por mim antes da entrega.
