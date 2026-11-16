@@ -4,11 +4,13 @@ import { Sobre } from './sobre/sobre';
 import { Projetos } from './projetos/projetos';
 import { Contato } from './contato/contato';
 import { Login } from './login/login';
+import { Gestao } from './gestao/gestao';
 
 export const routes: Routes = [
     { path: '', component: Home },
     { path: 'sobre', component: Sobre },
     { path: 'projetos', component: Projetos },
     { path: 'contato', component: Contato },
-    { path: 'login', component: Login }
+    { path: 'login', component: Login },
+    { path: 'gestao', component: Gestao }
 ];

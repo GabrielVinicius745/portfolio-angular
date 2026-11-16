@@ -1,0 +1,8 @@
+.gestao { max-width: 900px; margin: auto; }
+form { display: grid; gap: 8px; margin-bottom: 24px; }
+input, textarea, select { max-width: 100%; padding: 8px; font: inherit; }
+button { padding: 8px 14px; cursor: pointer; }
+button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 3px solid #3b579d; outline-offset: 2px; }
+.erro-campo { color: #a11919; }
+.linha-projeto { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid #ccc; }
+.linha-projeto span { flex: 1 1 220px; overflow-wrap: anywhere; }
