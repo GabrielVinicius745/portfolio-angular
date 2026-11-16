@@ -1,9 +1,9 @@
-import {Injectable, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Projeto {
-    id: number;
+    id?: number;
     nome: string;
     descricao: string;
     tecnologias: string;
@@ -14,9 +14,25 @@ export interface Projeto {
 @Injectable({ providedIn: 'root' })
 export class ProjetoService {
     private http = inject(HttpClient);
-    private Url = 'https://ideal-dollop-4j4rwr5gjp99fq7wv-3000.app.github.dev/api/projetos';
+    private url = 'https://ideal-dollop-4j4rwr5gjp99fq7wv-3000.app.github.dev/api/projetos';
 
     listar(): Observable<Projeto[]> {
-        return this.http.get<Projeto[]>(this.Url);
+        return this.http.get<Projeto[]>(this.url);
+    }
+
+    // POST: o projeto vai inteiro no corpo. Sem id - quem gera o id e o banco.
+    criar(projeto: Projeto): Observable<{ id?: number; mensagem?: string }> {
+        return this.http.post<{ id?: number; mensagem?: string }>(this.url, projeto);
+    }
+
+    // PUT: o id vai na URL (qual projeto) e o projeto vai no corpo (o que gravar).
+    atualizar(id: number, projeto: Projeto): Observable<{ id?: number; mensagem?: string }> {
+        return this.http.put<{ id?: number; mensagem?: string }>(`${this.url}/${id}`, projeto);
+    }
+
+    // 💡 LACUNA 2 - escreva o método excluir(id: number): Observable<void>.
+    // Mesma URL com ?id= do atualizar, sem corpo, e o verbo delete.
+    ecluir(id: number): Observable<void> {
+        return this.http.delete<void>(`${this.url}/${id}`);
     }
 }
