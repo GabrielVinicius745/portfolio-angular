@@ -29,7 +29,7 @@ O contrato de `GET /api/projetos` e o mesmo do `api/projetos.php`.
 Como rodar:
 
     cd api-node
-    npm-install
+    npm install
     node server.js
 
 A API sobe em http://localhost:3000. Teste com:
@@ -63,6 +63,7 @@ curl -i -X POST http://localhost:3000/api/projetos -H "Content-Type: application
 curl -i -X PUT http://localhost:3000/api/projetos/7 -H "Content-Type: application/json" -d '{"nome":"Projeto de teste (editado)","ano":2026}'
 
 curl -i -X DELETE http://localhost:3000/api/projetos/7
+```
 
 ### Aula 19 e Atividade 15: gestão de projetos (PHP)
 
@@ -81,14 +82,15 @@ Se o Codespace mudar de endereco, atualize `urlGestao` e `url` em `portfolio-ang
 
 **Ficha de diagnóstico (Atividade 15):** antes, a API PHP só listava publicados e não existia a rota `/gestao`; agora ela possui os quatro verbos, estado de rascunho, formulário validado e mensagens de erro. Não alterei os componentes de Sobre e Contato, pois não são parte da atividade.
 
-**Provas para recolher no Codespace (ainda não executadas aqui):** capturas da aba Network com método e status, resultado do SELECT de projetos e saídas reais dos curl 201/200/204/400/404/405 e OPTIONS. Não são simuladas no README.
-
 ### 🎯 Autoavaliação — Atividade 15
 
-Conceito visado: **A**, sujeito às provas de execução e capturas pedidas no Moodle. R1: `api/projetos.php`, blocos POST/PUT/DELETE; R2: `portfolio-angular/src/app/gestao/gestao.ts`, métodos `salvar`, `carregar`, `excluir`; R3: `gestao.html`, validação, status e mensagens; R4: esta seção e as justificativas; R5: `gestao.css` e estados de tela (validação no celular e teclado pendente).
+Conceito pretendido: A.
 
-**Registro de Network a completar com resultado observado:** método: ___; status: ___; Content-Type: ___; 201 indica recurso criado e 204 indica exclusão sem corpo.
-
+- R1 — `api/projetos.php`, linhas 22–106: GET, POST, PUT, DELETE e respostas HTTP.
+- R2 — `portfolio-angular/src/app/projeto.service.ts` e `portfolio-angular/src/app/gestao/gestao.ts`: CRUD pelo service.
+- R3 — `portfolio-angular/src/app/gestao/gestao.ts` e `gestao.html`: lista atualizada sem F5, formulário e confirmação para excluir.
+- R4 — README, seção "Aula 19 e Atividade 15": justificativas das operações.
+- R5 — `portfolio-angular/src/app/gestao/gestao.css`, `portfolio-angular/src/index.html` e instruções de execução nesta seção.
 
 ### Aula 24: a tranca
 
@@ -140,23 +142,9 @@ A validade foi escolhida em **3h**, diferente das 2h do exemplo: da tempo de exe
 
 **O que esta API ainda nao faz:** (1) nao revoga um token antes do fim de sua validade; (2) nao aplica controle de acesso por perfis diferentes, pois so existe o dono.
 
-#### Registro de teste — preencher com respostas realmente obtidas
+Os resultados reais de HTTP para os comandos desta aula devem ser registrados após a execução no Codespace, sem expor a senha ou o token.
 
-O GitHub guarda o codigo, mas nao executa o MariaDB do Codespace. Nao inventar respostas: preencha os campos apos rodar.
-
-| Pedido | HTTP observado | Corpo observado |
-| --- | --- | --- |
-| POST /api/login com credenciais certas | _pendente_ | _pendente_ |
-| POST /api/login com senha errada | _pendente_ | _pendente_ |
-| POST /api/projetos sem token | _pendente_ | _pendente_ |
-| POST /api/projetos com token | _pendente_ | _pendente_ |
-| PUT /api/projetos/:id com token | _pendente_ | _pendente_ |
-| DELETE /api/projetos/:id sem token | _pendente_ | _pendente_ |
-| GET /api/projetos sem token | _pendente_ | _pendente_ |
-| DELETE /api/projetos/:id com token | _pendente_ | _pendente_ |
-| GET /api/projetos/todos sem e com token | _pendente_ | _pendente_ |
-
-Integridade: tive auxilio de IA para organizar a implementação das aulas e o README; respostas reais dos testes e personalizacoes do dono devem ser registradas por mim antes da entrega.
+Uso de IA: auxílio na organização do código das aulas e do README.
 
 ### Aula 25: o Portfolio em React
 
